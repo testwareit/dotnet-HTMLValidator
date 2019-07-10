@@ -12,14 +12,40 @@ namespace dotnetHtmlValidator
             ValidatorUrl = manager.AppSettings.Settings["w3c_URL"].Value;
         }
 
-        
-        public void GetHtmlReport(string pageUrl)
+        public string GetHtmlReport(string pageUrl)
         {
             RestHelper restHelper = new RestHelper(ValidatorUrl);
+            restHelper.restRequest.AddQueryParameter("doc", pageUrl);
 
+            return restHelper.GET().Content;
+        }
+
+        public string GetJsonReport(string pageUrl)
+        {
+            RestHelper restHelper = new RestHelper(ValidatorUrl);
             restHelper.restRequest.AddQueryParameter("doc", pageUrl);
             restHelper.restRequest.AddQueryParameter("out", "json");
-            var result = restHelper.GET();
+
+            return restHelper.GET().Content;
+        }
+
+        public Model.W3C.W3C_Html_Json_Model GetJsonReportObjectized(string pageUrl)
+        {
+            RestHelper restHelper = new RestHelper(ValidatorUrl);
+            restHelper.restRequest.AddQueryParameter("doc", pageUrl);
+            restHelper.restRequest.AddQueryParameter("out", "json");
+
+            return restHelper.GET<Model.W3C.W3C_Html_Json_Model>();
+        }
+
+        public Model.W3C.W3C_Html_Report GetReport(string pageUrl)
+        {
+            RestHelper restHelper = new RestHelper(ValidatorUrl);
+            restHelper.restRequest.AddQueryParameter("doc", pageUrl);
+            restHelper.restRequest.AddQueryParameter("out", "json");
+
+            var reportJson = restHelper.GET<Model.W3C.W3C_Html_Json_Model>();
+            return new Model.W3C.W3C_Html_Report(reportJson);
         }
     }
 }
