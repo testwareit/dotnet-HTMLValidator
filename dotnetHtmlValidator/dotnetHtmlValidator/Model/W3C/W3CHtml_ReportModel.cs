@@ -4,19 +4,19 @@ using System.Text;
 
 namespace dotnetHtmlValidator.Model.W3C
 {
-    public class W3C_Html_Report
+    public class W3CHtml_ReportModel
     {
         public string URL { get; set; }
-        public List<W3C_Html_Report_Message_Model> messages { get; set; }
+        public List<W3CHtml_ReportModel_Message> messages { get; set; }
 
-        public W3C_Html_Report(W3C_Html_Json_Model baseModel)
+        public W3CHtml_ReportModel(W3C_Html_JsonResponse baseModel)
         {
             this.URL = baseModel.URL;
-            this.messages = new List<W3C_Html_Report_Message_Model>();
+            this.messages = new List<W3CHtml_ReportModel_Message>();
 
             foreach (var message in baseModel.messages)
             {
-                this.messages.Add(new W3C_Html_Report_Message_Model()
+                this.messages.Add(new W3CHtml_ReportModel_Message()
                 {
                     Extract = message.Extract,
                     FirstColumn = message.FirstColumn,

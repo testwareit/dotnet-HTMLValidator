@@ -4,7 +4,7 @@ using System.Text;
 
 namespace dotnetHtmlValidator.Model.W3C
 {
-    public class W3C_Html_Report_Message_Model
+    public class W3C_Html_JsonResponse_Message
     {
         public string Extract { get; set; }
         public int FirstColumn { get; set; }
@@ -14,7 +14,6 @@ namespace dotnetHtmlValidator.Model.W3C
         public int LastLine { get; set; }
         public int LastColumn { get; set; }
         public string Message { get; set; }
-        public string ParsedMessage { get; set; }
         public string SubType { get; set; }
         public string Type { get; set; }
     }
